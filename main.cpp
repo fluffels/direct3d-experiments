@@ -19,6 +19,9 @@ int error(const char* msg) {
 LRESULT CALLBACK
 WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 	switch (msg) {
+	case WM_LBUTTONDOWN:
+		MessageBox(hwnd, "LBUTTONDOWN", "Event", MB_OK | MB_ICONINFORMATION);
+		break;
 	case WM_CLOSE:
 		DestroyWindow(hwnd);
 		break;
