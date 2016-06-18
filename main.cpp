@@ -10,6 +10,8 @@ const char window_title[] = "My Window";
 const int window_width = 640;
 const int window_height = 480;
 
+bool keyboard[256];
+
 int error(const char* msg) {
 	LOG(ERROR) << msg;
 	MessageBox(NULL, msg, "Error", MB_ICONEXCLAMATION | MB_OK);
@@ -19,12 +21,14 @@ int error(const char* msg) {
 LRESULT CALLBACK
 WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 	switch (msg) {
+	//NOTE(jan): See https://msdn.microsoft.com/en-us/library/windows/desktop/dd375731(v=vs.85).aspx
 	case WM_KEYDOWN:
+		keyboard[wParam] = true;
 		break;
 	case WM_KEYUP:
+		keyboard[wParam] = false;
 		break;
 	case WM_LBUTTONDOWN:
-		MessageBox(hwnd, "LBUTTONDOWN", "Event", MB_OK | MB_ICONINFORMATION);
 		break;
 	case WM_CLOSE:
 		DestroyWindow(hwnd);
